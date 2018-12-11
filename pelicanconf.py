@@ -5,6 +5,8 @@ from __future__ import unicode_literals
 AUTHOR = u'scbai'
 SITENAME = u"Bigred.Scb's Blog"
 SITEURL = ''
+YEAR_ARCHIVE_SAVE_AS = 'archive.html'
+YEAR_ARCHIVE_URL = 'archive.html'
 
 PATH = 'content'
 
