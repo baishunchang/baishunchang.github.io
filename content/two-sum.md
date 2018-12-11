@@ -1,6 +1,7 @@
 Title: [LeetCode 1] Two Sum
 Category: Leetcode
 Tags: Array, Hash Table, Google
+Date: 2018-12-09
 Authors: scbai
 
 ### Question
@@ -30,7 +31,7 @@ Read thru the list of integers, and each time add (targer - curInt) to the hashm
 
 If the number is contained in the HashMap, solution found. 
 
-### My code 
+### Code 
 
 ```python
 class Solution(object):
