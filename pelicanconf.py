@@ -35,3 +35,4 @@ DEFAULT_PAGINATION = 10
 #RELATIVE_URLS = True
 
 THEME = 'pelican-octopress-theme'
+SEARCH_BOX = True
