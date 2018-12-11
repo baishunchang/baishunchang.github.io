@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>[LeetCode 235] Lowest Common Ancestor of a Binary Search Tree &mdash; Bigred.Scb's Blog</title>
+  <meta name="author" content="scbai">
+
+
+
+
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <link href="/favicon.png" rel="icon">
+
+  <link href="/theme/css/main.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+
+  <link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="/">Bigred.Scb's Blog</a></h1>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+</ul>
+
+<form class="search" action="/search.html">
+    <input type="text" class="search-query" placeholder="Search" name="q" id="s">
+</form>
+
+<ul class="main-navigation">
+      <li class="active">
+        <a href="/category/leetcode.html">Leetcode</a>
+      </li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">[LeetCode 235] Lowest Common Ancestor of a Binary Search Tree</h1>
+    <p class="meta">
+<time datetime="2018-12-10T00:00:00-08:00" pubdate>Mon 10 December 2018</time>    </p>
+</header>
+
+  <div class="entry-content"><h3>Question</h3>
+<p><a href="https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/">link</a></p>
+<div class="entry bg-color bg-img font-color">
+    <blockquote class="bg-color bg-img font-color">
+        <p class="font-color bg-color bg-img">Given a binary search tree (BST), find the lowest common ancestor of two given nodes in the BST.</p>
+    </blockquote>
+    <p class="font-color bg-color bg-img"><span id="more-782" class="font-color"></span>
+        <br>
+    </p><pre class="bg-color bg-img font-color">        _______<span style="color: #990000;" class="font-color">6</span>______
+       /              \
+    ___<span style="color: #990000;" class="font-color">2</span>__          ___<span style="color: #990000;" class="font-color">8</span>__
+   /      \        /      \
+   <span style="color: #990000;" class="font-color">0</span>      _<span style="color: #990000;" class="font-color">4       7       9</span>
+         /  \
+         <span style="color: #990000;" class="font-color">3   5</span></pre>
+    <p class="font-color bg-color bg-img">Using the above tree as an example, the lowest common ancestor (LCA) of nodes <span style="color: #990000;" class="font-color">2</span> and <span style="color: #990000;" class="font-color bg-color bg-img">8</span> is <span style="color: #990000;" class="font-color">6</span>. But how about LCA of nodes <span style="color: #990000;" class="font-color">2</span> and <span style="color: #990000;" class="font-color">4</span>? Should it be <span style="color: #990000;" class="font-color">6</span> or <span style="color: #990000;" class="font-color">2</span>?</p>
+    <p class="font-color bg-color bg-img">According to the <a href="http://en.wikipedia.org/wiki/Least_common_ancestor" class="font-color">definition of LCA on  Wikipedia</a>: "The lowest common ancestor is defined between two nodes <em>v</em> and <em>w</em> as the lowest node in T that has both <em>v</em> and <em>w</em> as descendants (where we allow a node to be a descendant of itself)." Since a node can be a descendant of itself, the LCA of <span style="color: #990000;" class="font-color">2</span> and <span style="color: #990000;" class="font-color">4</span> should be <span style="color: #990000;" class="font-color">2</span>, according to this definition.</p>
+    <p class="font-color bg-color bg-img"><strong>Hint:</strong>
+        <br>A top-down walk from the root of the tree is enough.</p>
+</div>
+
+<h3>Analysis</h3>
+<p><strong>This question is the easiest of this series of questions</strong>. I will quote the solution analysis.</p>
+<blockquote>
+<p>There’s only three cases you need to consider. </p>
+</blockquote>
+<div class="highlight"><pre><span></span>1. Both nodes are to the left of the tree.
+2. Both nodes are to the right of the tree.
+3. One node is on the left while the other is on the right. This node must be LCA. 
+4. Current node equals to one of the two nodes, this node must be the LCA.
+</pre></div>
+
+
+<blockquote>
+<p>The run time complexity is O(h), where h is the height of the BST. </p>
+</blockquote>
+<h3>Code</h3>
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Solution</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="c1"># @param {TreeNode} root</span>
+    <span class="c1"># @param {TreeNode} p</span>
+    <span class="c1"># @param {TreeNode} q</span>
+    <span class="c1"># @return {TreeNode}</span>
+    <span class="k">def</span> <span class="nf">lowestCommonAncestor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">):</span>
+        <span class="n">s</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">([</span><span class="n">p</span><span class="o">.</span><span class="n">val</span><span class="p">,</span> <span class="n">q</span><span class="o">.</span><span class="n">val</span><span class="p">])</span>
+        <span class="k">while</span> <span class="ow">not</span> <span class="n">s</span> <span class="o">&lt;=</span> <span class="n">root</span><span class="o">.</span><span class="n">val</span> <span class="o">&lt;=</span> <span class="n">b</span><span class="p">:</span>
+            <span class="c1"># Keep searching since root is outside of [s, b].</span>
+            <span class="n">root</span> <span class="o">=</span> <span class="n">root</span><span class="o">.</span><span class="n">left</span> <span class="k">if</span> <span class="n">s</span> <span class="o">&lt;=</span> <span class="n">root</span><span class="o">.</span><span class="n">val</span> <span class="k">else</span> <span class="n">root</span><span class="o">.</span><span class="n">right</span>
+        <span class="c1"># s &lt;= root.val &lt;= b.</span>
+        <span class="k">return</span> <span class="n">root</span>
+</pre></div></div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">
+        scbai
+    </span>
+  </span>
+<time datetime="2018-12-10T00:00:00-08:00" pubdate>Mon 10 December 2018</time>  <span class="categories">
+    <a class='category' href='/category/leetcode.html'>Leetcode</a>
+  </span>
+  <span class="categories">
+    <a class="category" href="/tag/tree.html">Tree</a>,    <a class="category" href="/tag/google.html">Google</a>  </span>
+</p><div class="sharing">
+</div>    </footer>
+  </article>
+
+</div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="/leetcode-235-lowest-common-ancestor-of-a-binary-search-tree.html">[LeetCode 235] Lowest Common Ancestor of a Binary Search Tree</a>
+      </li>
+      <li class="post">
+          <a href="/leetcode-1-two-sum.html">[LeetCode 1] Two Sum</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+      
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="/category/leetcode.html">Leetcode</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+    <a href="/tag/hash-table.html">Hash Table</a>,    <a href="/tag/array.html">Array</a>,    <a href="/tag/google.html">Google</a>,    <a href="/tag/tree.html">Tree</a>  </section>
+
+
+
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+    Copyright &copy;  2018  scbai &mdash;
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+  <script src="/theme/js/modernizr-2.0.js"></script>
+  <script src="/theme/js/ender.js"></script>
+  <script src="/theme/js/octopress.js" type="text/javascript"></script>
+</body>
+</html>
